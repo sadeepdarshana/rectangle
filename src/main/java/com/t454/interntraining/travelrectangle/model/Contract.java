@@ -3,29 +3,30 @@ package com.t454.interntraining.travelrectangle.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "room_type")
-final public class RoomType {
+@Table(name = "contract")
+final public class Contract {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int hotelId;
 
-    private String name;
+    private int noOfRooms;
 
-    private float price;
-    private int noOfAdults;
 
-    private float markUp;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
 
-    public RoomType(){}
+    public Contract(){}
 
-    public RoomType(int id, int hotelId, float price, int noOfAdults, float markUp) {
-        this.id = id;
+    public Contract(int hotelId, int noOfRooms, Date startDate, Date endDate) {
         this.hotelId = hotelId;
-        this.price = price;
-        this.noOfAdults = noOfAdults;
-        this.markUp = markUp;
+        this.noOfRooms = noOfRooms;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getId() {
@@ -44,35 +45,27 @@ final public class RoomType {
         this.hotelId = hotelId;
     }
 
-    public String getName() {
-        return name;
+    public int getNoOfRooms() {
+        return noOfRooms;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNoOfRooms(int noOfRooms) {
+        this.noOfRooms = noOfRooms;
     }
 
-    public float getPrice() {
-        return price;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public int getNoOfAdults() {
-        return noOfAdults;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setNoOfAdults(int noOfAdults) {
-        this.noOfAdults = noOfAdults;
-    }
-
-    public float getMarkUp() {
-        return markUp;
-    }
-
-    public void setMarkUp(float markUp) {
-        this.markUp = markUp;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

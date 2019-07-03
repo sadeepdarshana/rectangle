@@ -1,22 +1,32 @@
-package com.t454.interntraining.travelrectangle;
+package com.t454.interntraining.travelrectangle.controller;
 
 import com.t454.interntraining.travelrectangle.model.RoomType;
+import com.t454.interntraining.travelrectangle.repository.RoomTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 
+@Controller
+@RequestMapping(path = "/roomtype")
+public class RoomTypeController {
+
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
 
 
+    @GetMapping(path="/add")
+    public @ResponseBody
+    String addRoomType (@RequestParam  int hotelId,@RequestParam  float price,@RequestParam  int noOfAdults,@RequestParam  float markUp) {
+        RoomType n = new RoomType(hotelId,price,noOfAdults,markUp);
+        roomTypeRepository.save(n);
+        return "Saved";
+    }
 
-
-@RestController
-public class Controller {
-
-
-    @RequestMapping(value = "/products")
-    public RoomType getProduct() {
-        return new RoomType(234234,567567,3457.0f,4,76,.15f);
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<RoomType> getAllUsers() {
+        return roomTypeRepository.findAll();
     }
 }

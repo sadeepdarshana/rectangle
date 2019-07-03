@@ -1,57 +1,77 @@
 package com.t454.interntraining.travelrectangle.model;
 
 
-import java.util.ArrayList;
-import java.util.Date;
 
-public class Contract {
-    private long contractId;
-    private long hotelId;
+import javax.persistence.*;
 
-    private Date startDate;
-    private Date   endDate;
+@Entity
+@Table(name = "room_type")
+final public class RoomType {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private int hotelId;
 
-    private ArrayList<Integer> roomIds;
+    private String name;
 
-    public Contract(){}
+    private float price;
+    private int noOfAdults;
 
-    public long getContractId() {
-        return contractId;
+    private float markUp;
+
+    public RoomType(){}
+
+    public RoomType(int hotelId, float price, int noOfAdults, float markUp) {
+        this.hotelId = hotelId;
+        this.price = price;
+        this.noOfAdults = noOfAdults;
+        this.markUp = markUp;
     }
 
-    public void setContractId(long contractId) {
-        this.contractId = contractId;
+    public int getId() {
+        return id;
     }
 
-    public long getHotelId() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(long hotelId) {
+    public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getName() {
+        return name;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public float getPrice() {
+        return price;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    public ArrayList<Integer> getRoomIds() {
-        return roomIds;
+    public int getNoOfAdults() {
+        return noOfAdults;
     }
 
-    public void setRoomIds(ArrayList<Integer> roomIds) {
-        this.roomIds = roomIds;
+    public void setNoOfAdults(int noOfAdults) {
+        this.noOfAdults = noOfAdults;
+    }
+
+    public float getMarkUp() {
+        return markUp;
+    }
+
+    public void setMarkUp(float markUp) {
+        this.markUp = markUp;
     }
 }

@@ -1,32 +1,37 @@
 package com.t454.interntraining.travelrectangle.controller;
 
+import com.t454.interntraining.travelrectangle.model.Contract;
 import com.t454.interntraining.travelrectangle.model.RoomType;
+import com.t454.interntraining.travelrectangle.repository.ContractRepository;
 import com.t454.interntraining.travelrectangle.repository.RoomTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
 
 
 @Controller
-@RequestMapping(path = "/roomtype")
-public class RoomTypeController {
+@RequestMapping(path = "/contract")
+public class ContractController {
 
     @Autowired
-    private RoomTypeRepository roomTypeRepository;
+    private ContractRepository contractRepository;
 
 
     @GetMapping(path="/add")
     public @ResponseBody
-    String addRoomType (@RequestParam int id,@RequestParam  int hotelId,@RequestParam  float price,@RequestParam  int noOfAdults,@RequestParam  float markUp) {
-        RoomType n = new RoomType(id,hotelId,price,noOfAdults,markUp);
-        roomTypeRepository.save(n);
+    String addContract (@RequestParam int hotelId,@RequestParam  int noOfRooms,@RequestParam  Date startDate,@RequestParam  Date endDate) {
+        Contract n = new Contract(hotelId,noOfRooms,startDate,endDate);
+        contractRepository.save(n);
         return "Saved";
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<RoomType> getAllUsers() {
-        return roomTypeRepository.findAll();
+    public @ResponseBody Iterable<Contract> getAllUsers() {
+        return contractRepository.findAll();
     }
 }
