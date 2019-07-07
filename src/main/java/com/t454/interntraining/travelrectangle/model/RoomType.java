@@ -6,33 +6,26 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "room_type")
-final public class RoomType {
+final public class RoomType extends BusinessLogicObject
+{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int roomTypeId;
     private int hotelId;
-
-    private String name;
-
-    private float price;
-    private int noOfAdults;
+    private String roomTypeName;
+    private float roomTypePrice;
+    private int roomTypeCapacity;
+    private float roomTypeMarkup;
 
     private float markUp;
 
     public RoomType(){}
 
-    public RoomType(int hotelId, float price, int noOfAdults, float markUp) {
-        this.hotelId = hotelId;
-        this.price = price;
-        this.noOfAdults = noOfAdults;
-        this.markUp = markUp;
+    public int getRoomTypeId() {
+        return roomTypeId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setRoomTypeId(int roomTypeId) {
+        this.roomTypeId = roomTypeId;
     }
 
     public int getHotelId() {
@@ -43,28 +36,36 @@ final public class RoomType {
         this.hotelId = hotelId;
     }
 
-    public String getName() {
-        return name;
+    public String getRoomTypeName() {
+        return roomTypeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoomTypeName(String roomTypeName) {
+        this.roomTypeName = roomTypeName;
     }
 
-    public float getPrice() {
-        return price;
+    public float getRoomTypePrice() {
+        return roomTypePrice;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setRoomTypePrice(float roomTypePrice) {
+        this.roomTypePrice = roomTypePrice;
     }
 
-    public int getNoOfAdults() {
-        return noOfAdults;
+    public int getRoomTypeCapacity() {
+        return roomTypeCapacity;
     }
 
-    public void setNoOfAdults(int noOfAdults) {
-        this.noOfAdults = noOfAdults;
+    public void setRoomTypeCapacity(int roomTypeCapacity) {
+        this.roomTypeCapacity = roomTypeCapacity;
+    }
+
+    public float getRoomTypeMarkup() {
+        return roomTypeMarkup;
+    }
+
+    public void setRoomTypeMarkup(float roomTypeMarkup) {
+        this.roomTypeMarkup = roomTypeMarkup;
     }
 
     public float getMarkUp() {
