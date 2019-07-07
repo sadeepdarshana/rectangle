@@ -1,6 +1,8 @@
 package com.t454.interntraining.travelrectangle.utils;
 
 
+import com.t454.interntraining.travelrectangle.model.BusinessLogicObject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -42,4 +44,7 @@ public final class Utils {
         return list;
     }
 
+    public static void addTimestamp(BusinessLogicObject blo){
+        blo.setAddedTime(System.currentTimeMillis());
+    }
 }

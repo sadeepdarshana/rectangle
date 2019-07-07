@@ -1,6 +1,7 @@
 package com.t454.interntraining.travelrectangle.controller;
 
 import com.t454.interntraining.travelrectangle.model.Hotel;
+import com.t454.interntraining.travelrectangle.model.projections.HotelNameId;
 import com.t454.interntraining.travelrectangle.repository.HotelRepository;
 import com.t454.interntraining.travelrectangle.service.responseobjects.*;
 import com.t454.interntraining.travelrectangle.utils.Utils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.t454.interntraining.travelrectangle.utils.Utils.*;
@@ -22,7 +24,6 @@ public class HotelController {
 
     @Autowired
     private HotelRepository hotelRepository;
-
 
     //----------------------------------------addHotel----------------------------------------------------------------
     @PostMapping(path="/add")
@@ -42,7 +43,7 @@ public class HotelController {
         }
 
         try {
-
+            Utils.addTimestamp(newHotelInfo);
             hotelRepository.save(newHotelInfo);
             return new ResponseEntity<>(new CreatedResponse(newHotelInfo.getHotelId()), HttpStatus.CREATED);
         }catch (Exception e){
@@ -54,10 +55,15 @@ public class HotelController {
     //----------------------------------------getAllHotels------------------------------------------------------------
     @GetMapping(path="/all")
     @ResponseBody
-    public ResponseEntity<?> getAllHotels() {
+    public ResponseEntity<?> getAllHotels(@RequestParam(required=false, defaultValue="false") boolean nameIdOnly) {
         try {
-            ArrayList<Hotel> allHotels = Utils.iteratorToArrayList(hotelRepository.findAll());
-            return new ResponseEntity<>(new HotelListResponse(allHotels), HttpStatus.OK);
+            if (nameIdOnly) {
+                List<HotelNameId> allHotels = (hotelRepository.findAllProjectedBy());
+                return new ResponseEntity<>(new HotelNameIdListResponse(allHotels), HttpStatus.OK);
+            } else {
+                ArrayList<Hotel> allHotels = Utils.iteratorToArrayList(hotelRepository.findAll());
+                return new ResponseEntity<>(new HotelListResponse(allHotels), HttpStatus.OK);
+            }
         }catch (Exception e){
             return new ResponseEntity<>(new InternalServerErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

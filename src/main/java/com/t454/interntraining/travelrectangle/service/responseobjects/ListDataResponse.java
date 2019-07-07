@@ -1,12 +1,13 @@
 package com.t454.interntraining.travelrectangle.service.responseobjects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListDataResponse extends DataResponse {
 
     private int objectsCount;
 
-    public ListDataResponse(ArrayList data) {
+    public ListDataResponse(List data) {
         super(data);
         setDescription("Required objects in data field");
         setObjectsCount(data.size());
