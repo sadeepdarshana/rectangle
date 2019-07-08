@@ -52,4 +52,17 @@ public class RoomTypeController {
             return new ResponseEntity<>(new InternalServerErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(path="/byHotelId")
+    @ResponseBody
+    public ResponseEntity<?> getAllRoomTypesByHotelId(@RequestParam int hotelId) {
+        try
+        {
+            ArrayList<RoomType> allRoomTypes = Utils.iteratorToArrayList(roomTypeRepository.findByHotelId(hotelId));
+            return new ResponseEntity<>(new RoomTypeListResponse(allRoomTypes), HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(new InternalServerErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
