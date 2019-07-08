@@ -13,6 +13,7 @@ public class SearchRequest {
     private Date endDate;
     private int hotelId;
     private CapacityCount[] items;
+    private int hotelDistrictIndex;
 
     public SearchRequest() {
     }
@@ -47,5 +48,13 @@ public class SearchRequest {
 
     public void setItems(CapacityCount[] items) {
         this.items = items;
+    }
+
+    public int getHotelDistrictIndex() {
+        return hotelDistrictIndex;
+    }
+
+    public void setHotelDistrictIndex(int hotelDistrictIndex) {
+        this.hotelDistrictIndex = hotelDistrictIndex;
     }
 }

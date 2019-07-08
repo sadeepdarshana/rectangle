@@ -11,4 +11,6 @@ public interface HotelRepository extends CrudRepository<Hotel, Integer> {
 
     List<HotelNameId> findAllProjectedBy();
 
+    Hotel findHotelByHotelId(int hotelId);
+
 }
