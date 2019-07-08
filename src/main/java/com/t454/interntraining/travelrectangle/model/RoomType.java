@@ -15,8 +15,8 @@ final public class RoomType extends BusinessLogicObject
     private float roomTypePrice;
     private int roomTypeCapacity;
     private float roomTypeMarkup;
-
-    private float markUp;
+    private int contractId;
+    private int quantity;
 
     public RoomType(){}
 
@@ -68,11 +68,19 @@ final public class RoomType extends BusinessLogicObject
         this.roomTypeMarkup = roomTypeMarkup;
     }
 
-    public float getMarkUp() {
-        return markUp;
+    public int getContractId() {
+        return contractId;
     }
 
-    public void setMarkUp(float markUp) {
-        this.markUp = markUp;
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -7,14 +7,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "contract")
-final public class Contract {
+final public class Contract extends BusinessLogicObject{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int contractId;
     private int hotelId;
-
-    private int noOfRooms;
-
-
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)
@@ -22,19 +18,18 @@ final public class Contract {
 
     public Contract(){}
 
-    public Contract(int hotelId, int noOfRooms, Date startDate, Date endDate) {
+    public Contract(int hotelId, Date startDate, Date endDate) {
         this.hotelId = hotelId;
-        this.noOfRooms = noOfRooms;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public int getId() {
-        return id;
+    public int getContractId() {
+        return contractId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
     }
 
     public int getHotelId() {
@@ -43,14 +38,6 @@ final public class Contract {
 
     public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
-    }
-
-    public int getNoOfRooms() {
-        return noOfRooms;
-    }
-
-    public void setNoOfRooms(int noOfRooms) {
-        this.noOfRooms = noOfRooms;
     }
 
     public Date getStartDate() {

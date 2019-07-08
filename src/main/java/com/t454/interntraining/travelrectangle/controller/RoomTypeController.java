@@ -28,10 +28,12 @@ public class RoomTypeController {
 
     @PostMapping(path="/add")
     @ResponseBody
-    public ResponseEntity<?> addHotel (@RequestBody RoomType newRoomTypeInfo) {
+    public ResponseEntity<?> addRoomType (@RequestBody RoomType newRoomTypeInfo) {
 
         try {
             Utils.addTimestamp(newRoomTypeInfo);
+            newRoomTypeInfo.setContractId(-1);
+            newRoomTypeInfo.setQuantity(0);
             roomTypeRepository.save(newRoomTypeInfo);
             return new ResponseEntity<>(new CreatedResponse(newRoomTypeInfo.getRoomTypeId()), HttpStatus.CREATED);
         }catch (Exception e){

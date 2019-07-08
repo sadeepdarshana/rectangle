@@ -8,4 +8,5 @@ import java.util.List;
 public interface RoomTypeRepository extends CrudRepository<RoomType, Integer> {
 
     List<RoomType> findByHotelId(int hotelId);
+    RoomType findRoomTypeByRoomTypeId(int hotelId);
 }
