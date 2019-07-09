@@ -4,10 +4,10 @@ import com.t454.interntraining.travelrectangle.model.*;
 import com.t454.interntraining.travelrectangle.repository.ContractRepository;
 import com.t454.interntraining.travelrectangle.repository.HotelRepository;
 import com.t454.interntraining.travelrectangle.repository.RoomTypeRepository;
+import com.t454.interntraining.travelrectangle.service.responseobjects.SearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ public class MainSearchService {
             if(neededFromEachCapacity[cc]==0)for(int i:hotelIds)hotelValidationMatrix.get(i)[cc]=true;
 
         for(RoomType r:roomTypes){
-            if(r.getQuantity()>=neededFromEachCapacity[r.getRoomTypeCapacity()-1]){
+            if(neededFromEachCapacity[r.getRoomTypeCapacity()-1]!=0 && r.getQuantity()>=neededFromEachCapacity[r.getRoomTypeCapacity()-1]){
                 selectedRoomTypes.get(r.getHotelId())[r.getRoomTypeCapacity()-1] = r;
                 hotelValidationMatrix.get(r.getHotelId())[r.getRoomTypeCapacity()-1] = true;
             }
@@ -94,8 +94,24 @@ public class MainSearchService {
         }
 
 
+        ArrayList<HotelResult> hotelResults = new ArrayList<>();
 
-        return new ResponseEntity<>(selectedHotelIds, HttpStatus.OK);
+        for(int i:selectedHotelIds){
+            HotelResult hr =new HotelResult(hotelRepository.findHotelByHotelId(i));
+            if(searchDistrict != -1 & searchDistrict != hr.getHotelDistrictIndex())continue;
+
+            hr.setRoomTypes(new ArrayList<>());
+            for(int k=0;k<4;k++){
+                hr.getRoomTypes().add(selectedRoomTypes.get(i)[k]);
+            }
+            hotelResults.add(hr);
+        }
+
+
+        SearchResponse result = new SearchResponse(hotelResults);
+
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

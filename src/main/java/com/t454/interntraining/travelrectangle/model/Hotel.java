@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "hotels")
-final public class Hotel extends BusinessLogicObject
+public class Hotel extends BusinessLogicObject
 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int hotelId;
